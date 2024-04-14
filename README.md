@@ -25,6 +25,14 @@ For the training process, we used the popular MNIST dataset from the PyTorch lib
 
 Following the training phase on the MNIST dataset, we had to implement the spatially transformed adversarial examples. While the paper describes the algorithm, it did not provide accompanying code. Consequently, a decision was made to see if existing code was available online. A few other GitHub users had already implemented the spatially transformed adversarial examples attack. The selected code, which aligned with our own, can be seen [&#39;here&#39;](https://github.com/as791/stAdv-PyTorch/blob/main/StAdv_attack.ipynb).
 
+The basic approach of this adversarieal algorithm is to generate a flow field by minimizing a loss function which has two componants, an adversarial and a flow loss. This flow field is then used to alter the original input image by computing the value at each pixel of the adversarial image by its original value shifted by the flow field and computed from the original image using the bilinear transform [CITE].
+
+The flow field is calulated as:
+
+![1713110503915](image/README/1713110503915.png)
+
+Where g(x) is the logit output of model g, and i the specific ith logit element. N(p) is the four neighbouring pixels of the point p. The first term is known as the adversarial loss, as it quantifies how effective the adversarial attack is, while the second term is the flow loss. κ is the cofidence parameter, and τ is the relative weight of the flow loss.
+
 ## Optimisation
 
 The first attempts to attack the trained models performed very poorly, with attack success rates that were below 10%, a far cry from the 99+% attack success rate  reported in [CITE]. The suspicion was that this was largely due to some difference in the implementation of the attack method, optimization configuration. As such we investigated a number of ways to improve the overall attack success rates of this technique, including configuration of the optimization, attack initialization and various parameter tunings, such as loss function weights and confidence thresholds.
@@ -56,6 +64,7 @@ This investigation starts with κ, also known as the confidence. This parameter 
 The last step on this path of parameter optimization was τ, which weights the overall flow loss relative to the adversarial loss. When talking about this parameter it is most intuitive to view the flow loss as a form of penalization, which punishes points moving far away from their original positions or in different directions to their neighbours. This penalization means that the images retain their general structure, and edges are largely preserved, meaning that results are largely still similar to the original to a human eye and do not have strange artifacting as some other adversarial techniques produce. This however also constrains how much the attacks can change the original image, potentially limiting the algorithm's attack ability. Thus various values of τ ranging from the initial 0.05 to 0 were tested. This unsurprisingly had a beneficial effect, pushing the attack success rate up by another 10-20% with sufficiently small values. The final results show the results with a rather small value of 0.0001. This of course is not ideal, as the attacks are no longer penalised for larger divergences from the original sample, and thus tend to look more noticeably adversarial, a problem which is further exacerbated by the non-zero initialization of the flow matrices.
 
 ## Results
+<<<<<<< HEAD
 This section contains the final results after the optimalisation on the attack. The code used for these results can also be seen back in the [`code`](https://github.com/Sebastiaanvm/DL_Group35/blob/main/project.ipynb).
 As stated before, our objective is to get a replication of the results described in the paper. To achieve this, we recreated the exact experimental scenarios outlined within the paper. Consequently, we applied the attack methodology to the MNIST dataset, aiming to provoke misclassifications within the targeted data points. 
 
@@ -87,10 +96,28 @@ Following the training and attack phases on our three models, we evaluated the a
 
 To further reinforce our findings, conducted additional experiments using the same settings employed in our previous experiments. However, this time, we transitioned from the simple MNIST dataset to the more complicated FashionMNIST dataset.
 TODO fashion mnist results.
+=======
+
+TODO show results
+>>>>>>> 8ccf1d6 (add discussion section and brief loss overview)
+
+Model                		A       	B       	C
+
+---
+
+Accuracy (p)         		93.95%  	83.04%  	91.11%
+Attack Success Rate  	41.00%  	50.50%  	53.50%
+
 
 ## Discussion
 
-TODO how to improve more etc.
+From the quantitative results in the previous section we can see that after all the optimization the model achieves an attack success rate of 40-55% depending on the model being attacked. This is far superior to the results obtained at the start, but still not close to the results reported in the original paper, which was over 99%. This is assumed to be caused by some incorrect parameter/structural setup, as a large number of details relating to the models and adversarial optimization are not included in [CITE] itself.
+
+Due to the parameter adjustments made in the previous section we can see that the overall image clarity and identifiability has deteriorated drastically, which is unfortunately very much counter to the original intention of the authors of [CITE]. This may be more easily discernible by a human due to the simplicity of the MNIST dataset, and on a more complex image may be indiscernible.
+
+There are two other possible explanations we considered for the poor results obtained by this algorithm aside from parameter setup. Firstly, it is possible that the gradient of the adversarial loss component of the overall loss used to calculate the optimal flow does not correctly calculate the gradients from the model itself, this is an implementation issue, and is very challenging to identify without existing code to compare against. The second possibility is that the models tested in [CITE] were trained differently. A possibility in this line is that since the models in question were trained far more in [CITE] than those tested by us, and as such could be more sensitive to small perturbations than the models which have been trained less.
+
+The most natural extension to this program would be to isolate the difference between this implementation and the original implementation by the authors. Furthermore, this technique could be tested on a number of different additional datasets and models to identify its performance. Variations to this technique such as different optimisers and optimisation parameters could give additional insights. Finally, in terms of defence techniques, an effective tool noted in [CITE] was a gaussian blur to remove the alterations of the adversarial flow. Another avenue of defence may be other digital filters such as opening and closing, or more complex filter structures if it is known in which frequency region the images of interest exist in the 2d Gaussian domain.
 
 ## References
 
