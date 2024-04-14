@@ -66,13 +66,13 @@ The last step on this path of parameter optimization was τ, which weights the o
 ## Results
 
 This section contains the final results after the optimisation of the attack. The code used for these results can also be seen back in the [`code`](https://github.com/Sebastiaanvm/DL_Group35/blob/main/project.ipynb).
-As stated before, our objective is to get a replication of the results described in the paper. To achieve this, we recreated the exact experimental scenarios outlined within the paper. Consequently, we applied the attack methodology to the MNIST dataset, aiming to provoke misclassifications within the targeted data points. 
+As stated before, our objective is to get a replication of the results described in the paper. To achieve this, we recreated the exact experimental scenarios outlined within the paper. Consequently, we applied the attack methodology to the MNIST dataset, aiming to provoke misclassifications within the targeted data points.
 
 In the following figure, we provide a visual representation of select attacks, illustrating the true class, the misclassified class, and the targeted class for each attack. These samples offer a glimpse into the effectiveness and impact of the applied attack strategy.
 
 ![test](image/README/attack.png)
 
-The next figure showcases our replicated results, aligning closely with the results described in the referenced paper. Here, we present the classes that have been successfully attacked and subsequently misclassified. 
+The next figure showcases our replicated results, aligning closely with the results described in the referenced paper. Here, we present the classes that have been successfully attacked and subsequently misclassified.
 
 ![test](image/README/target_class.png)
 
@@ -88,13 +88,13 @@ Following the training and attack phases on our three models, we evaluated the a
 | Model               | A       | B        | C       |
 | ------------------- | ------- | -------- | ------- |
 | Accuracy (p)        | 98.58%  |  98.94%  | 99.11%  |
-| Attack success rate | 99.95%  |  99.98%  | 100.00% |  
+| Attack success rate | 99.95%  |  99.98%  | 100.00% |
 
 
 | Model               | A       | B        | C       |
 | ------------------- | ------- | -------- | ------- |
 | Accuracy (p)        | 93.95%  |  83.04%  | 91.11%  |
-| Attack success rate | 41.00%  |  50.50%  | 53.50%  | 
+| Attack success rate | 41.00%  |  50.50%  | 53.50%  |
 
 
 To further reinforce our findings, conducted additional experiments using the same settings employed in our previous experiments. However, this time, we transitioned from the simple MNIST dataset to the more complicated FashionMNIST dataset. The attack results are depicted in the following figure:
@@ -105,7 +105,7 @@ The new results across the three models are summarized in the table below:
 | Model               | A       | B        | C       |
 | ------------------- | ------- | -------- | ------- |
 | Accuracy (p)        | 72.40%  |  69.34%  | 71.42%  |
-| Attack success rate | 52.00%  |  55.00%  | 60.00%  | 
+| Attack success rate | 52.00%  |  55.00%  | 60.00%  |
 
 A decrease in accuracy and an increase in attack success rate is observed. This observed shift can be explained by the lower training accuracy, which makes it easier to misclassify target data points with our attack.
 This outcome further substantiates the effectiveness of our attack strategy, as it can be used in a more complicated dataset, showing its versatility and applicability in a broader context.
