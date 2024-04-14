@@ -5,7 +5,7 @@ The following students of group 35 are part of this project:
 
 | Name                      | ID      | Contact                              | Contribution                                                      |
 | ------------------------- | ------- | ------------------------------------ | ----------------------------------------------------------------- |
-| Kai Grotepass             | 5953553 | k.grotepass@student.tudelft.nl       | Optimalisation, parameter tuning, result analysis                 |
+| Kai Grotepass             | 5953553 | k.grotepass@student.tudelft.nl       | Optimisation, parameter tuning, result analysis/discussion    |
 | Sebastiaan van Moergestel | 5421497 | s.a.vanmoergestel@student.tudelft.nl | Setting up environment, implementation, model architecture tuning |
 
 Our contribution can be seen in [`project.ipynb`](https://github.com/Sebastiaanvm/DL_Group35/blob/main/project.ipynb) where we attempt to recreate the deep learning models and adversarial attacks that are described in the paper.
