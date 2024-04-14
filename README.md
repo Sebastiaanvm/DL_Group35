@@ -64,7 +64,7 @@ This investigation starts with κ, also known as the confidence. This parameter 
 The last step on this path of parameter optimization was τ, which weights the overall flow loss relative to the adversarial loss. When talking about this parameter it is most intuitive to view the flow loss as a form of penalization, which punishes points moving far away from their original positions or in different directions to their neighbours. This penalization means that the images retain their general structure, and edges are largely preserved, meaning that results are largely still similar to the original to a human eye and do not have strange artifacting as some other adversarial techniques produce. This however also constrains how much the attacks can change the original image, potentially limiting the algorithm's attack ability. Thus various values of τ ranging from the initial 0.05 to 0 were tested. This unsurprisingly had a beneficial effect, pushing the attack success rate up by another 10-20% with sufficiently small values. The final results show the results with a rather small value of 0.0001. This of course is not ideal, as the attacks are no longer penalised for larger divergences from the original sample, and thus tend to look more noticeably adversarial, a problem which is further exacerbated by the non-zero initialization of the flow matrices.
 
 ## Results
-<<<<<<< HEAD
+
 This section contains the final results after the optimalisation on the attack. The code used for these results can also be seen back in the [`code`](https://github.com/Sebastiaanvm/DL_Group35/blob/main/project.ipynb).
 As stated before, our objective is to get a replication of the results described in the paper. To achieve this, we recreated the exact experimental scenarios outlined within the paper. Consequently, we applied the attack methodology to the MNIST dataset, aiming to provoke misclassifications within the targeted data points. 
 
@@ -96,17 +96,6 @@ Following the training and attack phases on our three models, we evaluated the a
 
 To further reinforce our findings, conducted additional experiments using the same settings employed in our previous experiments. However, this time, we transitioned from the simple MNIST dataset to the more complicated FashionMNIST dataset.
 TODO fashion mnist results.
-=======
-
-TODO show results
->>>>>>> 8ccf1d6 (add discussion section and brief loss overview)
-
-Model                		A       	B       	C
-
----
-
-Accuracy (p)         		93.95%  	83.04%  	91.11%
-Attack Success Rate  	41.00%  	50.50%  	53.50%
 
 
 ## Discussion
