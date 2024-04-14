@@ -126,5 +126,6 @@ The most natural extension to this program would be to isolate the difference be
 
 [1]	R. H. Byrd, R. H. Byrd, P. Lu,et al., “A limited memory algorithm for bound constrained optimization,”
 SIAM Journal on Scientific Computing, 1995.doi:10.1137/0916069.
+
 [2]	C. Xiao, J.-Y. Zhu, B. Li, W. He, M. Liu, and D. Song, “Spatially transformed adversarial examples,”
 International Conference on Learning Representations, 2018.
