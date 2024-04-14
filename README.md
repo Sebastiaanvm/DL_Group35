@@ -25,13 +25,13 @@ For the training process, we used the popular MNIST dataset from the PyTorch lib
 
 Following the training phase on the MNIST dataset, we had to implement the spatially transformed adversarial examples. While the paper describes the algorithm, it did not provide accompanying code. Consequently, a decision was made to see if existing code was available online. A few other GitHub users had already implemented the spatially transformed adversarial examples attack. The selected code, which aligned with our own, can be seen [&#39;here&#39;](https://github.com/as791/stAdv-PyTorch/blob/main/StAdv_attack.ipynb).
 
-The basic approach of this adversarieal algorithm is to generate a flow field by minimizing a loss function which has two componants, an adversarial and a flow loss. This flow field is then used to alter the original input image by computing the value at each pixel of the adversarial image by its original value shifted by the flow field and computed from the original image using the bilinear transform [2].
+The basic approach of this adversarial algorithm is to generate a flow field by minimising a loss function which has two components, an adversarial and a flow loss. This flow field is then used to alter the original input image by computing the value at each pixel of the adversarial image by its original value shifted by the flow field and computed from the original image using the bilinear transform [2].
 
-The flow field is calulated as:
+The flow field is calculated as:
 
 ![1713110503915](image/README/1713110503915.png)
 
-Where g(x) is the logit output of model g, and i the specific ith logit element. N(p) is the four neighbouring pixels of the point p. The first term is known as the adversarial loss, as it quantifies how effective the adversarial attack is, while the second term is the flow loss. κ is the cofidence parameter, and τ is the relative weight of the flow loss.
+Where g(x) is the logit output of model g, and is the specific ith logit element. N(p) is the four neighbouring pixels of the point p. The first term is known as the adversarial loss, as it quantifies how effective the adversarial attack is, while the second term is the flow loss. κ is the confidence parameter, and τ is the relative weight of the flow loss.
 
 ## Optimisation
 
