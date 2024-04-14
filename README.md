@@ -94,9 +94,17 @@ Following the training and attack phases on our three models, we evaluated the a
 | Attack success rate | 41.00%  |  50.50%  | 53.50%  | 
 
 
-To further reinforce our findings, conducted additional experiments using the same settings employed in our previous experiments. However, this time, we transitioned from the simple MNIST dataset to the more complicated FashionMNIST dataset.
-TODO fashion mnist results.
+To further reinforce our findings, conducted additional experiments using the same settings employed in our previous experiments. However, this time, we transitioned from the simple MNIST dataset to the more complicated FashionMNIST dataset. The attack results are depicted in the following figure:
 
+![test](image/README/attack_fashion.png)
+
+The new results across the three models are summarized in the table below:
+| Model               | A       | B        | C       |
+| ------------------- | ------- | -------- | ------- |
+| Accuracy (p)        | 72.40%  |  69.34%  | 71.42%  |
+| Attack success rate | 52.00%  |  55.00%  | 60.00%  | 
+
+A decrease in accuracy and an increase in attack success rate is observed. This shift can be explained by the lower training accuracy, which makes it easier to misscalssify target data points with our attack.
 
 ## Discussion
 
