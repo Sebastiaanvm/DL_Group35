@@ -66,12 +66,12 @@ The last step on this path of parameter optimization was τ, which weights the o
 ## Results
 
 This section contains the final results after the optimalisation on the attack. The code used for these results can also be seen back in the [`code`](https://github.com/Sebastiaanvm/DL_Group35/blob/main/project.ipynb).
-As stated before, our objective is to get a replication of the results described in the paper. To achieve this, we recreated the exact experimental scenarios outlined within the paper. Consequently, we applied the attack methodology to the MNIST dataset, aiming to provoke misclassifications within the targeted data points. 
+As stated before, our objective is to get a replication of the results described in the paper. To achieve this, we recreated the exact experimental scenarios outlined within the paper. Consequently, we applied the attack methodology to the MNIST dataset, aiming to provoke misclassifications within the targeted data points.
 
 In the the following figure, we provide a visual representation of select attacks, illustrating the true class, the misclassified class, and the targeted class for each attack. These samples offer a glimpse into the effectiveness and impact of the applied attack strategy.
 ![test](image/README/attack.png)
 
-The next figure showcases our replicated results, aligning closely to the results described in the referenced paper. Here, we present the classes that have been successfully attacked and subsequently misclassified. 
+The next figure showcases our replicated results, aligning closely to the results described in the referenced paper. Here, we present the classes that have been successfully attacked and subsequently misclassified.
 ![test](image/README/target_class.png)
 
 We compare this with the same figure of the paper, which can be seen below:
@@ -79,30 +79,28 @@ We compare this with the same figure of the paper, which can be seen below:
 
 While our results bear similarities to the paper's findings, slight diviations can be seen due to different values of paramters that were not explicitly detailed in the original paper. Despite these nuanced differences, our replicated results maintain a consistent pattern and similarities, reinforcing the validity of our attack implementation.
 
-
 Following the training and attack phases on our three models, we evaluated the accuracy and attack success rate as detailed in the following tables. The first table contains the results of the original paper. The second details our own results evaluated from our experiments. A direct comparison reveals that our results exhibit lower values for both accuracy and attack success rate. The original paper lacks critical information on the parameters used in both training the models and executing the attacks. This limitation restricts our ability to optimize our models effectively.
 
-| Model               | A       | B        | C       |
-| ------------------- | ------- | -------- | ------- |
-| Accuracy (p)        | 98.58%  |  98.94%  | 99.11%  |
-| Attack success rate | 99.95%  |  99.98%  | 100.00% |  
+| Model               | A      | B      | C       |
+| ------------------- | ------ | ------ | ------- |
+| Accuracy (p)        | 98.58% | 98.94% | 99.11%  |
+| Attack success rate | 99.95% | 99.98% | 100.00% |
 
-
-| Model               | A       | B        | C       |
-| ------------------- | ------- | -------- | ------- |
-| Accuracy (p)        | 93.95%  |  83.04%  | 91.11%  |
-| Attack success rate | 41.00%  |  50.50%  | 53.50%  | 
-
+| Model               | A      | B      | C      |
+| ------------------- | ------ | ------ | ------ |
+| Accuracy (p)        | 93.95% | 83.04% | 91.11% |
+| Attack success rate | 41.00% | 50.50% | 53.50% |
 
 To further reinforce our findings, conducted additional experiments using the same settings employed in our previous experiments. However, this time, we transitioned from the simple MNIST dataset to the more complicated FashionMNIST dataset. The attack results are depicted in the following figure:
 
 ![test](image/README/attack_fashion.png)
 
 The new results across the three models are summarized in the table below:
-| Model               | A       | B        | C       |
-| ------------------- | ------- | -------- | ------- |
-| Accuracy (p)        | 72.40%  |  69.34%  | 71.42%  |
-| Attack success rate | 52.00%  |  55.00%  | 60.00%  | 
+
+| Model               | A      | B      | C      |
+| ------------------- | ------ | ------ | ------ |
+| Accuracy (p)        | 72.40% | 69.34% | 71.42% |
+| Attack success rate | 52.00% | 55.00% | 60.00% |
 
 A decrease in accuracy and an increase in attack success rate is observed. This shift can be explained by the lower training accuracy, which makes it easier to misscalssify target data points with our attack.
 
@@ -113,6 +111,8 @@ From the quantitative results in the previous section we can see that after all 
 Due to the parameter adjustments made in the previous section we can see that the overall image clarity and identifiability has deteriorated drastically, which is unfortunately very much counter to the original intention of the authors of [CITE]. This may be more easily discernible by a human due to the simplicity of the MNIST dataset, and on a more complex image may be indiscernible.
 
 There are two other possible explanations we considered for the poor results obtained by this algorithm aside from parameter setup. Firstly, it is possible that the gradient of the adversarial loss component of the overall loss used to calculate the optimal flow does not correctly calculate the gradients from the model itself, this is an implementation issue, and is very challenging to identify without existing code to compare against. The second possibility is that the models tested in [CITE] were trained differently. A possibility in this line is that since the models in question were trained far more in [CITE] than those tested by us, and as such could be more sensitive to small perturbations than the models which have been trained less.
+
+There is another interesting note to make from the results above: we can see from the target classes (shown in brackets) that even when the attack is succseful, it often does not classify the attack to the desired class, simply to some incorrect class. This may support the idea that the adversarial loss gradients are not being correctly computed, an simply introducing enough of a disturbance to cause misclassification.
 
 The most natural extension to this program would be to isolate the difference between this implementation and the original implementation by the authors. Furthermore, this technique could be tested on a number of different additional datasets and models to identify its performance. Variations to this technique such as different optimisers and optimisation parameters could give additional insights. Finally, in terms of defence techniques, an effective tool noted in [CITE] was a gaussian blur to remove the alterations of the adversarial flow. Another avenue of defence may be other digital filters such as opening and closing, or more complex filter structures if it is known in which frequency region the images of interest exist in the 2d Gaussian domain.
 
